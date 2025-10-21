@@ -59,3 +59,20 @@ app.post('/mahasiswa', (req, res) => {
             }
     );
 });
+
+app.put('/mahasiswa/:id', (req, res) => {
+    const userId = req.params.id;
+    const { nama, alamat, agama } = req.body;
+
+    db.query(
+        "UPDATE biodata SET nama = ?, alamat = ?, agama = ? WHERE id = ?",
+        [nama, alamat, agama, userid],
+        (err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: "Database error."});
+            }
+            res.json({ message: "user updated successfully."});
+        }
+    );
+}); 
